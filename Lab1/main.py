@@ -1,7 +1,7 @@
 import time
 from datetime import datetime
 from bs4 import BeautifulSoup
-from lxml import html
+from lxml import etree
 import csv
 import requests
 
@@ -29,21 +29,22 @@ while year <= _today_year_:
             print('Reached the current date')
             break
 
-        url = _url_samara_ + str(year) + '/' + str(month)
-        html_site = requests.get(url, headers)
+        url = _url_samara_ + str(year) + '/' + str(month) + '/'
+        print(url)
+        page = requests.get(url, headers=headers)
 
         writer = csv.writer(database)
 
-        soup = BeautifulSoup(url.text, "html.parser")
+        soup = BeautifulSoup(page.text, "lxml")
 
-        data = []
+        dom = etree.HTML(str(soup))
+        res = dom.xpath('//*[@id="data_block"]/table')[0].findall('tr')
+        data = list()
 
-        for item in soup.find_all("td"):
-            if item.find('<td class="first">') != -1:
-                data.append(item.get_text())
-
-
-
+        print(res)
+        for row in res:
+            data.append([c.text for c in row.getchildren()])
+            writer.writerow(data)
 
         month += 1
     year += 1
