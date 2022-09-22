@@ -1,18 +1,15 @@
-import os
 import time
-import requests
 from datetime import datetime
-from datetime import date
 from bs4 import BeautifulSoup
-
-def get_content(_html):
-    soup = BeautifulSoup(_html, 'html.parser')
-    #for item in soup.find_all('td')
-
-
-
+from lxml import html
+import csv
+import requests
 
 start = time.time()
+
+headers = {'user-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
+           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+           }
 
 _url_samara_ = 'https://www.gismeteo.ru/diary/4618/'
 
@@ -31,10 +28,21 @@ while year <= _today_year_:
         if year == _today_year_ and month == _today_month_:
             print('Reached the current date')
             break
-        url = _url_samara_ + str(year) + '/' + str(month)
-        html_site = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
 
-        #list =
+        url = _url_samara_ + str(year) + '/' + str(month)
+        html_site = requests.get(url, headers)
+
+        writer = csv.writer(database)
+
+        soup = BeautifulSoup(url.text, "html.parser")
+
+        data = []
+
+        for item in soup.find_all("td"):
+            if item.find('<td class="first">') != -1:
+                data.append(item.get_text())
+
+
 
 
         month += 1
