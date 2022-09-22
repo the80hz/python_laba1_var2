@@ -2,7 +2,14 @@ import os
 import time
 import requests
 from datetime import datetime
+from datetime import date
 from bs4 import BeautifulSoup
+
+def get_content(_html):
+    soup = BeautifulSoup(_html, 'html.parser')
+    #for item in soup.find_all('td')
+
+
 
 
 start = time.time()
@@ -16,6 +23,8 @@ year = 2008
 month = 1
 
 database = open('dataset.csv', 'w+')
+database.write('File generated: ' + str(datetime.today()) + '\n')
+database.write('data,temperature,pressure,wind \n')
 
 while year <= _today_year_:
     while month <= 12:
@@ -23,7 +32,9 @@ while year <= _today_year_:
             print('Reached the current date')
             break
         url = _url_samara_ + str(year) + '/' + str(month)
-        request_go = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+        html_site = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+
+        #list =
 
 
         month += 1
