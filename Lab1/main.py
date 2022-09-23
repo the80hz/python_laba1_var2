@@ -1,20 +1,18 @@
 from datetime import datetime
 from bs4 import BeautifulSoup
-from lxml import etree
 import csv
 import requests
 
-start = time.time()
-
-HEADERS = {'user-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
-           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
-           }
-
-URL = 'https://www.gismeteo.ru/diary/4618/'
+URL = 'https://www.gismeteo.ru/diary/4618'
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+}
 
 TODAY_YEAR = datetime.now().timetuple().tm_year
 TODAY_MONTH = datetime.now().timetuple().tm_mon
 
+start = datetime.now().timestamp()
 year = 2008
 month = 1
 
@@ -48,6 +46,5 @@ while year <= TODAY_YEAR:
     year += 1
     month = 1
 
-print('Scraping task finished')
-end = time.time()
-print(str(round(end - start, 2)) + 'sec')
+end = datetime.now().timestamp()
+print(f'Scraping task finished in {round(end - start, 2)} sec')
