@@ -9,42 +9,35 @@ HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
 }
 
+start = datetime.now().timestamp()
 TODAY_YEAR = datetime.now().timetuple().tm_year
 TODAY_MONTH = datetime.now().timetuple().tm_mon
 
-start = datetime.now().timestamp()
 year = 2008
 month = 1
 
-database = open('dataset.csv', 'w+')
-database.write('File generated: ' + str(datetime.today()) + '\n')
-database.write('data,temperature,pressure,wind \n')
+with open('dataset.csv', 'w+', encoding='utf8') as database:
+    print(f'File generated: {datetime.today()}', file=database)
+    print('data,temperature,pressure,wind', file=database)
 
-while year <= TODAY_YEAR:
-    while month <= 12:
-        if year == TODAY_YEAR and month == TODAY_MONTH:
-            print('Reached the current date')
-            break
+    while year <= TODAY_YEAR:
+        while month <= 12:
+            if year == TODAY_YEAR and month == TODAY_MONTH:
+                print('Reached the current date')
+                break
 
-        url = URL + str(year) + '/' + str(month) + '/'
-        print(url)
-        page = requests.get(url, headers=HEADERS)
+            page = requests.get(f'{URL}/{year}/{month}', headers=HEADERS)
+            soup = BeautifulSoup(page.text, 'html.parser')
 
-        writer = csv.writer(database)
+            writer = csv.writer(database)
+            for row in soup.select('div[id="data_block"]>table>tbody:last-child>tr'):
+                children = list(row.select('td'))
+                writer.writerow([c.text for c in children[:3] + [children[5]]])
 
-        soup = BeautifulSoup(page.text, "html")
+            month += 1
+        year += 1
+        month = 1
 
-        data = list()
-
-        for row in soup:
-            data.append()
-            
-
-            writer.writerow(data)
-
-        month += 1
-    year += 1
-    month = 1
 
 end = datetime.now().timestamp()
 print(f'Scraping task finished in {round(end - start, 2)} sec')
