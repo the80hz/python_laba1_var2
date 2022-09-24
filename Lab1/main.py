@@ -32,12 +32,19 @@ with open('dataset.csv', 'w+', encoding='utf8') as database:
             writer = csv.writer(database)
             for row in soup.select('div[id="data_block"]>table>tbody:last-child>tr'):
                 children = list(row.select('td'))
-                writer.writerow([c.text for c in children[:3] + [children[5]]])
 
+                num = ([c.text for c in children[0]])
+                y = ''.join(num)
+
+                date = [f'{year}.{month}.{str(y)}']
+                line = date + [c.text for c in children[1:3] + [children[5]]]
+
+                writer.writerow(line)
             month += 1
         year += 1
         month = 1
 
+    database.close()
 
 end = datetime.now().timestamp()
 print(f'Scraping task finished in {round(end - start, 2)} sec')
