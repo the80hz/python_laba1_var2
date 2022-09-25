@@ -10,41 +10,52 @@ HEADERS = {
 }
 
 start = datetime.now().timestamp()
-TODAY_YEAR = datetime.now().timetuple().tm_year
-TODAY_MONTH = datetime.now().timetuple().tm_mon
+YEAR = datetime.now().timetuple().tm_year
+MONTH = datetime.now().timetuple().tm_mon
 
-year = 2008
-month = 1
 
-with open('dataset.csv', 'w+', encoding='utf8') as database:
-    print(f'File generated: {datetime.today()}', file=database)
-    print('data,temperature,pressure,wind', file=database)
+def request(url):
+    return requests.get(url, headers=HEADERS)
 
-    while year <= TODAY_YEAR:
-        while month <= 12:
-            if year == TODAY_YEAR and month == TODAY_MONTH:
-                print('Reached the current date')
-                break
 
-            page = requests.get(f'{URL}/{year}/{month}', headers=HEADERS)
-            soup = BeautifulSoup(page.text, 'html.parser')
+def write_table(html, file):
+    soup = BeautifulSoup(html.text, 'html.parser')
 
-            writer = csv.writer(database)
-            for row in soup.select('div[id="data_block"]>table>tbody:last-child>tr'):
-                children = list(row.select('td'))
+    writer = csv.writer(dataset)
+    for row in soup.select('div[id="data_block"]>table>tbody:last-child>tr'):
+        children = list(row.select('td'))
 
-                num = ([c.text for c in children[0]])
-                y = ''.join(num)
+        num = ([c.text for c in children[0]])
+        y = ''.join(num)
 
-                date = [f'{year}.{month}.{str(y)}']
-                line = date + [c.text for c in children[1:3] + [children[5]]]
+        date = [f'{year}.{month}.{str(y)}']
+        line = date + [c.text for c in children[1:3] + [children[5]]]
 
-                writer.writerow(line)
-            month += 1
-        year += 1
+        writer.writerow(line)
+
+
+if __name__ == "__main__":
+    with open('dataset.csv', 'w+', encoding='utf8') as dataset:
+        print(f'File generated: {datetime.today()}', file=dataset)
+        print('data,temperature,pressure,wind', file=dataset)
+        year = 2008
         month = 1
 
-    database.close()
+        while year <= YEAR:
+            while month <= 12:
+                if year == YEAR and month == MONTH:
+                    print('Reached the current date')
+                    break
 
-end = datetime.now().timestamp()
-print(f'Scraping task finished in {round(end - start, 2)} sec')
+                page = request(f'{URL}/{year}/{month}')
+                write_table(page, dataset)
+
+                month += 1
+            year += 1
+            month = 1
+
+        dataset.close()
+
+    end = datetime.now().timestamp()
+    print(f'Scraping task finished in {round(end - start, 2)} sec')
+
