@@ -20,7 +20,7 @@ def write_table(url_from, file, year, month):
         num = ([c.text for c in children[0]])
         y = ''.join(num)
 
-        date = [f'{year}.{month}.{str(y)}']
+        date = [f'{year}-{month}-{str(y)}']
         line = date + [c.text for c in children[1:3] + [children[5]]]
 
         writer.writerow(line)
