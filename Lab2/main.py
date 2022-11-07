@@ -2,6 +2,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import csv
 import requests
+from datetime import datetime
 
 
 def write_table(url_from, file, year, month):
@@ -17,10 +18,12 @@ def write_table(url_from, file, year, month):
     for row in soup.select('div[id="data_block"]>table>tbody:last-child>tr'):
         children = list(row.select('td'))
 
-        num = ([c.text for c in children[0]])
-        y = ''.join(num)
-        date = [f'{year}-{month}-{str(y)}']
-        line = date + [c.text for c in children[1:3] + [children[5]]]
+        year = int(year)
+        month = int(month)
+        day = int("".join([c.text for c in children[0]]))
+        date = datetime(year, month, day)
+
+        line = [date.strftime('%Y-%m-%d')] + [c.text for c in children[1:3] + [children[5]]]
 
         writer.writerow(line)
 
@@ -59,7 +62,7 @@ if __name__ == "__main__":
     min_year = 2008
     min_month = 1
 
-    table_to_csv('dataset.csv', url, min_year, min_month)
+    table_to_csv('data/dataset.csv', url, min_year, min_month)
 
     end = datetime.now().timestamp()
     print(f'Scraping task finished in {round(end - start, 2)} sec')
