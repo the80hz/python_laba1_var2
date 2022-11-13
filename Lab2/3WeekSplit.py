@@ -5,7 +5,6 @@
 """
 
 import csv
-from datetime import datetime, timedelta
 
 
 def split_by_week_n(filename, n):
@@ -19,11 +18,24 @@ def split_by_week_n(filename, n):
         dataset.close()
 
     weeks = []
-    # every 7 rows append to weeks
+    # add to weeks n*7 rows
+    for i in range(n):
+        weeks.append(rows[i * 7:(i + 1) * 7])
 
-    print(weeks)
-
-
+    for i in range(n):
+        print(f'Работаем с {weeks[i][0][0]}')
+        week_data = weeks[i]
+        first_date = week_data[0][0]
+        first_date = first_date.replace('-', '')
+        last_date = week_data[-1][0]
+        last_date = last_date.replace('-', '')
+        print(f'Первая дата: {first_date}, последняя дата: {last_date}')
+        with open(f'data/{first_date}_{last_date}.csv', 'w+', encoding='utf8') as week_file:
+            writer = csv.writer(week_file)
+            writer.writerow(['data', 'temperature', 'pressure', 'wind'])
+            for row in week_data:
+                writer.writerow(row)
+            week_file.close()
 
 
 if __name__ == "__main__":
