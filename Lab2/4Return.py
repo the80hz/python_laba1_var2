@@ -55,6 +55,7 @@ def next(filename):
             date_data = list(reader)
             date_data = date_data[2:]
             dataset.close()
+            date_data.sort(key=lambda x: datetime.strptime(x[0], '%Y-%m-%d'))
             with open(f'{filename}.temp', 'w', encoding='utf8') as file:
                 writer = csv.writer(file)
                 writer.writerows(date_data)
@@ -62,17 +63,18 @@ def next(filename):
 
     with open(f'{filename}.temp', 'r', encoding='utf8') as file:
         reader = csv.reader(file)
-        date = list(reader)
+        data = list(reader)
         file.close()
 
+    temp = data[0]
 
+    # delete first row in file
+    with open(f'{filename}.temp', 'w', encoding='utf8') as file:
+        writer = csv.writer(file)
+        writer.writerows(data[1:])
+        file.close()
 
-    return date[0]
-
-
-
-
-
+    return temp
 
 
 if __name__ == "__main__":
@@ -81,5 +83,4 @@ if __name__ == "__main__":
     # print(search_with_file('data/20080207_20080213.csv', 'data/dataset.csv'))
     print(next(csv_name))
 
-    # if stop delete temp file
     # os.remove(f'{csv_name}.temp')
