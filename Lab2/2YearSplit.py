@@ -1,12 +1,8 @@
-"""
-Скрипт, который разбивает исходный csv на N файлов, где каждый отдельный соответствует одному году.
-Файлы называются по первой и последней дате, которую они содержат.
-"""
-
 import csv
+import os
 
 
-def split_by_year_n(filename, n):
+def split_by_year_n(output, filename, n):
     """
     Функция split_by_year_n(filename, n) разбивает файл filename на n файлов
     """
@@ -14,7 +10,6 @@ def split_by_year_n(filename, n):
         reader = csv.reader(dataset)
         rows = list(reader)
         rows = rows[2:]
-        dataset.close()
 
     years = []
     for row in rows:
@@ -33,13 +28,13 @@ def split_by_year_n(filename, n):
         last_date = year_data[-1][0]
         last_date = last_date.replace('-', '')
         print(f'Первая дата: {first_date}, последняя дата: {last_date}')
-        with open(f'data/{first_date}_{last_date}.csv', 'w+', encoding='utf8') as year_file:
+        path = os.path.join(output, f'{first_date}_{last_date}.csv')
+        with open(path, 'w+', encoding='utf8') as year_file:
             writer = csv.writer(year_file)
             writer.writerow(['data', 'temperature', 'pressure', 'wind'])
             for row in year_data:
                 writer.writerow(row)
-            year_file.close()
 
 
 if __name__ == "__main__":
-    split_by_year_n('data/dataset.csv', 3)
+    split_by_year_n('data/', 'data/dataset.csv', 3)
