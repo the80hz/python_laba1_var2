@@ -79,8 +79,10 @@ def next(filename):
 
 if __name__ == "__main__":
     csv_name = 'data/dataset.csv'
-    # print(search_with_date(datetime(2020, 1, 1), 'data/dataset.csv'))
-    # print(search_with_file('data/20080207_20080213.csv', 'data/dataset.csv'))
+    print(search_with_date(datetime(2020, 1, 1), 'data/dataset.csv'))
+    print(search_with_file('data/20080207_20080213.csv', 'data/dataset.csv'))
+    print(next(csv_name))
+    print(next(csv_name))
     print(next(csv_name))
 
-    # os.remove(f'{csv_name}.temp')
+    os.remove(f'{csv_name}.temp')
