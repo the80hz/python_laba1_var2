@@ -48,7 +48,38 @@ def search_with_file(x, filename):
     return data
 
 
-if __name__ == "__main__":
-    print(search_with_date(datetime(2020, 1, 1), 'data/dataset.csv'))
-    print(search_with_file('data/20080207_20080213.csv', 'data/dataset.csv'))
+def next(filename):
+    if not os.path.exists(f'{filename}.temp'):
+        with open(filename, 'r', encoding='utf8') as dataset:
+            reader = csv.reader(dataset)
+            date_data = list(reader)
+            date_data = date_data[2:]
+            dataset.close()
+            with open(f'{filename}.temp', 'w', encoding='utf8') as file:
+                writer = csv.writer(file)
+                writer.writerows(date_data)
+                file.close()
 
+    with open(f'{filename}.temp', 'r', encoding='utf8') as file:
+        reader = csv.reader(file)
+        date = list(reader)
+        file.close()
+
+
+
+    return date[0]
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    csv_name = 'data/dataset.csv'
+    # print(search_with_date(datetime(2020, 1, 1), 'data/dataset.csv'))
+    # print(search_with_file('data/20080207_20080213.csv', 'data/dataset.csv'))
+    print(next(csv_name))
+
+    # if stop delete temp file
+    # os.remove(f'{csv_name}.temp')
