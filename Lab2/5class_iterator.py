@@ -1,3 +1,4 @@
+import os
 from Return import next
 
 
@@ -21,6 +22,7 @@ class IteratorData:
             self.index += 1
             return result
         else:
+            os.remove(f'{self.filename}.temp')
             raise StopIteration
 
 
