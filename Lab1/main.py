@@ -4,7 +4,7 @@ import requests
 from datetime import datetime
 
 
-def write_table(url_from, file, year, month):
+def write_table(url_from: str, file, year: int, month: int):
     """
     Функция write_table(url_from, file, year, month) записывает определенную таблицу с html сайта в file.csv файл.
     Параметр url_from - ссылка на сайт, с которого будет производиться скачивание.
@@ -33,7 +33,7 @@ def write_table(url_from, file, year, month):
         writer.writerow(line)
 
 
-def table_to_csv(filename, url_from, year, month):
+def table_to_csv(filename: str, url_from: str, year: int, month: int):
     """
     Функция table_to_csv(filename, url_from, year, month) создает таблицу с именем
     filename, записывает в нее таблицу из url, с даты указанной даты year.month.
@@ -69,7 +69,7 @@ if __name__ == "__main__":
     min_year = 2008
     min_month = 1
 
-    table_to_csv('../data/dataset.csv', url, min_year, min_month)
+    table_to_csv('../data/dataset1.csv', url, min_year, min_month)
 
     end = datetime.now().timestamp()
     print(f'Scraping task finished in {round(end - start, 2)} sec')

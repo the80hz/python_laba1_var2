@@ -1,7 +1,7 @@
 import csv
 
 
-def split_by_date_data(output, filename):
+def split_by_date_data(output: str, filename: str):
     """
     Функция split_by_date_data(output, filename) разбивает исходный csv файл на два с одинаковым количеством строк.
     Первый файл будет содержать даты, второй - данные.

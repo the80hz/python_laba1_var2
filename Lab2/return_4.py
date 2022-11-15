@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 
-def search_with_date(date: datetime, filename):
+def search_with_date(date: datetime, filename: str):
     """
     Функция search_with_date(date, filename) ищет в файле filename данные по datetime.
     Если данных нет, то возвращает None.
@@ -21,7 +21,7 @@ def search_with_date(date: datetime, filename):
     return None
 
 
-def search_with_file(x, filename):
+def search_with_file(x:str, filename:str):
     """
     Функция search_with_file(x, filename) ищет в файле filename данные по дате из файла .csv.
     Если данных нет, то возвращает None.
@@ -49,7 +49,7 @@ def search_with_file(x, filename):
     return data
 
 
-def next(filename):
+def next(filename: str):
     """
     Функция next(filename) возвращает данные для самой ранней возможной даты в файле filename
     Параметр filename - имя файла, в котором будет производиться поиск.

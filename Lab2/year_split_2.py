@@ -2,7 +2,7 @@ import csv
 import os
 
 
-def split_by_year_n(output, filename, n):
+def split_by_year_n(output: str, filename: str, n: int):
     """
     Функция split_by_year_n(output, filename, n) разбивает файл filename на n файлов по годам.
     Параметр output - имя файла, в который будет записан результат.
