@@ -78,9 +78,9 @@ def next(filename):
 
 
 if __name__ == "__main__":
-    csv_name = 'data/dataset.csv'
-    print(search_with_date(datetime(2010, 1, 1), 'data/dataset.csv'))
-    print(search_with_file('data/20080207_20080213.csv', 'data/dataset.csv'))
+    csv_name = '../data/dataset.csv'
+    print(search_with_date(datetime(2010, 1, 1), csv_name))
+    print(search_with_file('../data/20080207_20080213.csv', csv_name))
     print(next(csv_name))
     print(next(csv_name))
     print(next(csv_name))

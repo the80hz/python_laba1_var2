@@ -40,4 +40,4 @@ def split_by_year_n(output, filename, n):
 
 
 if __name__ == "__main__":
-    split_by_year_n('data/', 'data/dataset.csv', 3)
+    split_by_year_n('../data/', '../data/dataset.csv', 3)

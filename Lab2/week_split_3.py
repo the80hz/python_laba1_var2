@@ -35,4 +35,4 @@ def split_by_week_n(output, filename, n):
 
 
 if __name__ == "__main__":
-    split_by_week_n('data/', 'data/dataset.csv', 7)
+    split_by_week_n('../data/', '../data/dataset.csv', 7)

@@ -27,6 +27,6 @@ class IteratorData:
 
 
 if __name__ == '__main__':
-    data = IteratorData(5, 'data/dataset.csv')
+    data = IteratorData(5, '../data/dataset.csv')
     for i in data:
         print(i)

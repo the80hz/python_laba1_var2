@@ -25,4 +25,4 @@ def split_by_date_data(output, filename):
 
 
 if __name__ == "__main__":
-    split_by_date_data('data/', 'data/dataset.csv')
+    split_by_date_data('../data/', '../data/dataset.csv')
