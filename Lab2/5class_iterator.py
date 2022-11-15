@@ -1,11 +1,13 @@
-"""
-Написать на основе next() класс итератора
-"""
 from Return import next
 
 
 class IteratorData:
-    def __init__(self, _data, filename):
+    """
+    Класс итератора, который возвращает данные из файла.
+    Параметр data - количество строк, которые необходимо вернуть.
+    Параметр filename - имя файла, из которого необходимо считывать данные.
+    """
+    def __init__(self, _data: int, filename: str):
         self.data = _data
         self.index = 0
         self.filename = filename
@@ -13,7 +15,7 @@ class IteratorData:
     def __iter__(self):
         return self
 
-    def __next__(self):
+    def __next__(self) -> str:
         if self.index < self.data:
             result = next(self.filename)
             self.index += 1

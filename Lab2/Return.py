@@ -4,7 +4,12 @@ from datetime import datetime
 
 
 def search_with_date(date: datetime, filename):
-    """Функция search_with_date(date, filename) ищет в файле filename данные по datetime."""
+    """
+    Функция search_with_date(date, filename) ищет в файле filename данные по datetime.
+    Если данных нет, то возвращает None.
+    Параметр date - дата, в формате datetime, по которой будет производиться поиск.
+    Параметр filename - имя файла, в котором будет производиться поиск.
+    """
     with open(filename, 'r', encoding='utf8') as dataset:
         reader = csv.reader(dataset)
         rows = list(reader)
@@ -17,7 +22,12 @@ def search_with_date(date: datetime, filename):
 
 
 def search_with_file(x, filename):
-    """Функция search_with_file(x, filename) ищет в файле filename данные по дате из файла .csv"""
+    """
+    Функция search_with_file(x, filename) ищет в файле filename данные по дате из файла .csv.
+    Если данных нет, то возвращает None.
+    Параметр x - имя файла с датами, по которой будет производиться поиск.
+    Параметр filename - имя файла, в котором будет производиться поиск.
+    """
     with open(filename, 'r', encoding='utf8') as dataset:
         reader = csv.reader(dataset)
         date_data = list(reader)
@@ -40,7 +50,10 @@ def search_with_file(x, filename):
 
 
 def next(filename):
-    """Функция next(filename) возвращает данные для самой ранней возможной даты в файле filename"""
+    """
+    Функция next(filename) возвращает данные для самой ранней возможной даты в файле filename
+    Параметр filename - имя файла, в котором будет производиться поиск.
+    """
     if not os.path.exists(f'{filename}.temp'):
         with open(filename, 'r', encoding='utf8') as dataset:
             reader = csv.reader(dataset)

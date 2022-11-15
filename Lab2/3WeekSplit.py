@@ -4,7 +4,10 @@ import os
 
 def split_by_week_n(output, filename, n):
     """
-    Функция split_by_week_n(filename, n) разбивает файл filename на n файлов
+    Функция split_by_week_n(output, filename, n) разбивает файл filename на n файлов по неделям.
+    Параметр output - имя файла, в который будет записан результат.
+    Параметр filename - имя файла, который будет разбит.
+    Параметр n - количество файлов, на которые будет разбит исходный файл.
     """
     with open(filename, 'r', encoding='utf8') as dataset:
         reader = csv.reader(dataset)
