@@ -5,7 +5,13 @@ from datetime import datetime
 
 
 def write_table(url_from, file, year, month):
-    """Функция write_table(html, file) записывает определенную таблицу с html сайта в file.csv файл"""
+    """
+    Функция write_table(url_from, file, year, month) записывает определенную таблицу с html сайта в file.csv файл.
+    Параметр url_from - ссылка на сайт, с которого будет производиться скачивание.
+    Параметр file - файл, в который будет записана таблица.
+    Параметр year - год, с которого будет записана в file.
+    Параметр month - месяц, с которого будет записана в file.
+    """
     headers = {
         'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
@@ -29,8 +35,12 @@ def write_table(url_from, file, year, month):
 
 def table_to_csv(filename, url_from, year, month):
     """
-    Функция table_to_csv(filename, url, year, month) создает таблицу с именем
-    filename, записывает в нее таблицу из url, с даты указанной даты year.month
+    Функция table_to_csv(filename, url_from, year, month) создает таблицу с именем
+    filename, записывает в нее таблицу из url, с даты указанной даты year.month.
+    Параметр filename - имя файла, в который будет записана таблица.
+    Параметр url_from - ссылка на сайт, с которого будет производиться скачивание.
+    Параметр year - год, с которого будет записана в file.
+    Параметр month - месяц, с которого будет записана в file.
     """
     with open(filename, 'w+', encoding='utf8') as dataset:
         print(f'File generated: {datetime.today()}', file=dataset)
