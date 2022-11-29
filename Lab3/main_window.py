@@ -41,32 +41,32 @@ class MainWindow(QMainWindow):
             self.path_to_dataset = QFileDialog.getOpenFileName(self, 'Выберите файл с данными', '',
                                                                'CSV files (*.csv)')[0]
 
+        self.button_annots = QPushButton('Создать файл аннотации', self)
+        self.button_annots.move(20, 70)
+        self.button_annots.resize(200, 50)
+        self.button_annots.clicked.connect(self.create_annots)
+        self.button_annots.setEnabled(False)
+        self.button_annots.show()
+
         self.button_dir = QPushButton('Выбрать директорию \nдля аннотаций', self)
         self.button_dir.move(20, 20)
         self.button_dir.resize(200, 50)
         self.button_dir.clicked.connect(self.open_dir)
         if self.path_to_annots != '':
             self.button_dir.setText('Директория выбрана')
+            self.button_dir.setEnabled(False)
+            self.button_annots.setEnabled(True)
         self.button_dir.show()
 
-        self.button_annots = QPushButton('Создать файл аннотации', self)
-        self.button_annots.move(20, 70)
-        self.button_annots.resize(200, 50)
-        self.button_annots.clicked.connect(self.create_annots)
-        self.button_annots.show()
-
-        # create qlineedit
-        self.years = QLineEdit(self)
+        self.years = QLineEdit('Введите количество лет', self)
         self.years.move(20, 120)
         self.years.resize(200, 20)
         self.years.show()
 
-        self.weeks = QLineEdit(self)
+        self.weeks = QLineEdit('Введите количество недель', self)
         self.weeks.move(20, 150)
         self.weeks.resize(200, 20)
         self.weeks.show()
-
-
 
     def create_annots(self):
         with open(self.path_to_dataset, 'r', encoding='utf8') as dataset:
@@ -79,12 +79,12 @@ class MainWindow(QMainWindow):
                 writer.writerows(date_data)
 
         self.button_annots.setText('Файл аннотации создан')
-        # self.button_annots.setEnabled(False)
 
     def open_dir(self):
         self.path_to_annots = QFileDialog.getExistingDirectory(self, 'Выберите директорию', '')[0]
         self.button_dir.setText('Директория выбрана')
         self.button_dir.setEnabled(False)
+        self.button_annots.setEnabled(True)
 
 
 if __name__ == '__main__':
