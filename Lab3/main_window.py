@@ -1,6 +1,8 @@
 # GUI pyqt6
 
 import sys
+import os
+import shutil
 import csv
 from datetime import datetime
 
@@ -30,6 +32,7 @@ class MainWindow(QMainWindow):
         # self.path_to_dataset = 'data/dataset.csv'
         self.path_to_dataset = ''
         # self.path_to_annots = 'data/'
+        self.path_to_dir = ''
         self.path_to_annots = ''
         self.initui()
 
@@ -52,7 +55,7 @@ class MainWindow(QMainWindow):
         self.button_dir.move(20, 20)
         self.button_dir.resize(200, 50)
         self.button_dir.clicked.connect(self.open_dir)
-        if self.path_to_annots != '':
+        if self.path_to_dir != '':
             self.button_dir.setText('Директория выбрана')
             self.button_dir.setEnabled(False)
             self.button_annots.setEnabled(True)
@@ -69,19 +72,15 @@ class MainWindow(QMainWindow):
         self.weeks.show()
 
     def create_annots(self):
-        with open(self.path_to_dataset, 'r', encoding='utf8') as dataset:
-            reader = csv.reader(dataset)
-            date_data = list(reader)
-            date_data = date_data[2:]
-            date_data.sort(key=lambda x: datetime.strptime(x[0], '%Y-%m-%d'))
-            with open(f'{self.path_to_dataset}.temp', 'w', encoding='utf8') as file:
-                writer = csv.writer(file)
-                writer.writerows(date_data)
+        # copy path_to_dataset to path_to_annots/dataset.csv.temp
+
+        shutil.copy(self.path_to_dataset, self.path_to_dir + '/dataset.csv.temp')
+        self.path_to_annots = self.path_to_dir + '/dataset.csv.temp'
 
         self.button_annots.setText('Файл аннотации создан')
 
     def open_dir(self):
-        self.path_to_annots = QFileDialog.getExistingDirectory(self, 'Выберите директорию', '')[0]
+        self.path_to_dir = QFileDialog.getExistingDirectory(self, 'Выберите директорию', '')
         self.button_dir.setText('Директория выбрана')
         self.button_dir.setEnabled(False)
         self.button_annots.setEnabled(True)
@@ -92,3 +91,6 @@ if __name__ == '__main__':
     window = MainWindow()
     window.show()
     app.exec()
+
+    # detele temp file
+    os.remove(window.path_to_annots)

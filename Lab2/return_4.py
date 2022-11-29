@@ -21,7 +21,7 @@ def search_with_date(date: datetime, filename: str):
     return None
 
 
-def search_with_file(x:str, filename:str):
+def search_with_file(x: str, filename: str):
     """
     Функция search_with_file(x, filename) ищет в файле filename данные по дате из файла .csv.
     Если данных нет, то возвращает None.
@@ -79,6 +79,7 @@ def next(filename: str):
 
 if __name__ == "__main__":
     csv_name = '../data/dataset.csv'
+
     print(search_with_date(datetime(2010, 1, 1), csv_name))
     print(search_with_file('../data/20080207_20080213.csv', csv_name))
     print(next(csv_name))
