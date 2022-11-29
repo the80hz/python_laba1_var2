@@ -69,7 +69,7 @@ if __name__ == "__main__":
     min_year = 2008
     min_month = 1
 
-    table_to_csv('../data/dataset1.csv', url, min_year, min_month)
+    table_to_csv('../data/dataset.csv', url, min_year, min_month)
 
     end = datetime.now().timestamp()
     print(f'Scraping task finished in {round(end - start, 2)} sec')
