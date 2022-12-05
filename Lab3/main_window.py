@@ -27,7 +27,8 @@ from Lab2 import return_4
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.next_day = None
+        self.table = None
+        self.label = None
         self.button_next = None
         self.button_years = None
         self.button_weeks = None
@@ -35,6 +36,8 @@ class MainWindow(QMainWindow):
         self.years = None
         self.button_annots = None
         self.button_dir = None
+        self.first_day = None
+        self.last_day = None
         # self.path_to_dataset = 'data/dataset.csv'
         self.path_to_dataset = ''
         # self.path_to_annots = 'data/'
@@ -49,6 +52,24 @@ class MainWindow(QMainWindow):
         while self.path_to_dataset == '':
             self.path_to_dataset = QFileDialog.getOpenFileName(self, 'Выберите файл с данными', '',
                                                                'CSV files (*.csv)')[0]
+
+        with open(self.path_to_dataset, 'r') as file:
+            reader = csv.reader(file)
+            next(reader)
+            next(reader)
+            for row in reader:
+                if row[0] == 'Date':
+                    continue
+                else:
+                    self.first_day = row[0]
+                    break
+        with open(self.path_to_dataset, 'r') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                if row[0] == 'Date':
+                    continue
+                else:
+                    self.last_day = row[0]
 
         self.button_annots = QPushButton('Создать файл аннотации', self)
         self.button_annots.move(255, 20)
@@ -96,14 +117,41 @@ class MainWindow(QMainWindow):
         self.button_next = QPushButton('Показать следующий день', self)
         self.button_next.move(20,430)
         self.button_next.resize(460, 50)
+        self.button_next.clicked.connect(self.next_day)
         self.button_next.setEnabled(False)
         self.button_next.show()
+
+        self.table = QTableWidget(self)
+        self.table.setColumnCount(4)
+        self.table.setRowCount(1)
+        self.table.setHorizontalHeaderLabels(['Дата', 'Температура', 'Давление', 'Ветер'])
+        self.table.move(20, 150)
+        self.table.resize(460, 270)
+        self.table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.table.setEnabled(False)
+        self.table.show()
+
+        self.show()
+
+
+
+    def next_day(self):
+        weather = return_4._next(self.path_to_annots)
+        # fill table
+        self.table.setItem(0, 0, QTableWidgetItem(weather[0]))
+        self.table.setItem(0, 1, QTableWidgetItem(weather[1]))
+        self.table.setItem(0, 2, QTableWidgetItem(weather[2]))
+        self.table.setItem(0, 3, QTableWidgetItem(weather[3]))
+
+
+
 
     def create_annots(self):
         shutil.copy(self.path_to_dataset, self.path_to_dir + '/dataset.csv.temp')
         self.path_to_annots = self.path_to_dir + '/dataset.csv.temp'
         self.button_annots.setText('Пересоздать файл аннотации')
         self.button_next.setEnabled(True)
+        self.table.setEnabled(True)
 
     def open_dir(self):
         self.path_to_dir = QFileDialog.getExistingDirectory(self, 'Выберите директорию', '')
@@ -122,7 +170,6 @@ class MainWindow(QMainWindow):
         self.button_weeks.setText('Файл создан')
 
 
-
 if __name__ == '__main__':
     app = QApplication([])
     window = MainWindow()
@@ -131,3 +178,4 @@ if __name__ == '__main__':
 
     if window.path_to_annots != '':
         os.remove(window.path_to_annots)
+        os.remove(window.path_to_annots + '.temp')

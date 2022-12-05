@@ -49,7 +49,7 @@ def search_with_file(x: str, filename: str):
     return data
 
 
-def next(filename: str):
+def _next(filename: str):
     """
     Функция next(filename) возвращает данные для самой ранней возможной даты в файле filename
     Параметр filename - имя файла, в котором будет производиться поиск.
@@ -74,16 +74,16 @@ def next(filename: str):
         writer = csv.writer(file)
         writer.writerows(data[1:])
 
-    return temp[1:]
+    return temp
 
 
 if __name__ == "__main__":
     csv_name = '../data/dataset.csv'
 
-    print(search_with_date(datetime(2010, 1, 1), csv_name))
-    print(search_with_file('../data/20080207_20080213.csv', csv_name))
-    print(next(csv_name))
-    print(next(csv_name))
-    print(next(csv_name))
+    # print(search_with_date(datetime(2010, 1, 1), csv_name))
+    # print(search_with_file('../data/20080207_20080213.csv', csv_name))
+    print(_next(csv_name))
+    print(_next(csv_name))
+    print(_next(csv_name))
 
     os.remove(f'{csv_name}.temp')

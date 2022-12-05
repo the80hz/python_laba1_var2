@@ -1,5 +1,5 @@
 import os
-from return_4 import next
+from return_4 import _next
 
 
 class IteratorData:
@@ -18,7 +18,7 @@ class IteratorData:
 
     def __next__(self) -> str:
         if self.index < self.data:
-            result = next(self.filename)
+            result = _next(self.filename)
             self.index += 1
             return result
         else:
