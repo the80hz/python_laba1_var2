@@ -1,27 +1,16 @@
 # GUI pyqt6
 
-import sys
+import csv
 import os
 import shutil
-import csv
-from datetime import datetime
 
-from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QInputDialog, QTableWidget, \
-    QTableWidgetItem, QHeaderView, QAbstractItemView, QMenu, QAbstractScrollArea, QAbstractItemView, \
-    QPushButton, QComboBox, QCheckBox, QSpinBox, QDoubleSpinBox, QLabel, QGroupBox, QGridLayout, QFormLayout \
-    , QRadioButton, QButtonGroup, QSizePolicy, QScrollArea, QFrame, QTabWidget, QStackedWidget, QStackedLayout, \
-    QStatusBar, QProgressBar, QToolButton, QToolBar, QStyle, QStyleOption, QStylePainter, QStyleFactory, \
-    QStyleOptionProgressBar, QStyleOptionSlider, QStyleOptionToolButton, QStyleOptionButton, QStyleOptionTab, \
-    QStyleOptionTabWidgetFrame, QStyleOptionTabBarBase, QLineEdit, QPlainTextEdit, QDateEdit, QTimeEdit
+from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QTableWidget, \
+    QTableWidgetItem, QAbstractItemView, \
+    QPushButton, QLineEdit
 
-from PyQt6.QtGui import QCursor
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QPixmap
-from PyQt6.QtCore import Qt
-
-from Lab2 import year_split_2
-from Lab2 import week_split_3
 from Lab2 import return_4
+from Lab2 import week_split_3
+from Lab2 import year_split_2
 
 
 class MainWindow(QMainWindow):
@@ -133,8 +122,6 @@ class MainWindow(QMainWindow):
 
         self.show()
 
-
-
     def next_day(self):
         weather = return_4._next(self.path_to_annots)
         # fill table
@@ -142,9 +129,6 @@ class MainWindow(QMainWindow):
         self.table.setItem(0, 1, QTableWidgetItem(weather[1]))
         self.table.setItem(0, 2, QTableWidgetItem(weather[2]))
         self.table.setItem(0, 3, QTableWidgetItem(weather[3]))
-
-
-
 
     def create_annots(self):
         shutil.copy(self.path_to_dataset, self.path_to_dir + '/dataset.csv.temp')
