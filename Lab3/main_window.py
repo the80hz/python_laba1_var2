@@ -65,7 +65,8 @@ class MainWindow(QMainWindow):
         self.button_annots.setEnabled(False)
         self.button_annots.show()
 
-        self.years = QLineEdit('Введите количество лет', self)
+        self.years = QLineEdit(self)
+        self.years.setPlaceholderText('Количество лет')
         self.years.move(20, 140)
         self.years.resize(225, 30)
         self.years.show()
@@ -77,7 +78,8 @@ class MainWindow(QMainWindow):
         self.button_years.setEnabled(False)
         self.button_years.show()
 
-        self.weeks = QLineEdit('Введите количество недель', self)
+        self.weeks = QLineEdit(self)
+        self.weeks.setPlaceholderText('Количество недель')
         self.weeks.move(255, 140)
         self.weeks.resize(225, 30)
         self.weeks.show()
