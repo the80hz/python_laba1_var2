@@ -27,7 +27,7 @@ def split_by_week_n(output: str, filename: str, n: int):
         last_date = last_date.replace('-', '')
         print(f'Первая дата: {first_date}, последняя дата: {last_date}')
         path = os.path.join(output, f'{first_date}_{last_date}.csv')
-        with open(path, 'w+', encoding='utf8') as week_file:
+        with open(path, 'w', encoding='utf8', newline='') as week_file:
             writer = csv.writer(week_file)
             writer.writerow(['data', 'temperature', 'pressure', 'wind'])
             for row in week_data:

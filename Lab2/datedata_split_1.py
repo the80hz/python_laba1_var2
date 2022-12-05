@@ -13,12 +13,12 @@ def split_by_date_data(output: str, filename: str):
         next(reader)
         rows = list(reader)
 
-    with open(f'{output}X.csv', 'w+', encoding='utf8') as dates:
+    with open(f'{output}X.csv', 'w', encoding='utf8', newline='') as dates:
         writer = csv.writer(dates)
         for row in rows:
             writer.writerow([row[0]])
 
-    with open(f'{output}Y.csv', 'w+', encoding='utf8') as data:
+    with open(f'{output}Y.csv', 'w', encoding='utf8', newline='') as data:
         writer = csv.writer(data)
         for row in rows:
             writer.writerow(row[1:])

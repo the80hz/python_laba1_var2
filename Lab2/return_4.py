@@ -60,7 +60,7 @@ def _next(filename: str):
             date_data = list(reader)
             date_data = date_data[2:]
             date_data.sort(key=lambda x: datetime.strptime(x[0], '%Y-%m-%d'))
-            with open(f'{filename}.temp', 'w', encoding='utf8') as file:
+            with open(f'{filename}.temp', 'w', encoding='utf8', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerows(date_data)
 
@@ -70,7 +70,7 @@ def _next(filename: str):
 
     temp = data[0]
 
-    with open(f'{filename}.temp', 'w', encoding='utf8') as file:
+    with open(f'{filename}.temp', 'w', encoding='utf8', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(data[1:])
 
@@ -82,6 +82,9 @@ if __name__ == "__main__":
 
     # print(search_with_date(datetime(2010, 1, 1), csv_name))
     # print(search_with_file('../data/20080207_20080213.csv', csv_name))
+    print(_next(csv_name))
+    print(_next(csv_name))
+    print(_next(csv_name))
     print(_next(csv_name))
     print(_next(csv_name))
     print(_next(csv_name))

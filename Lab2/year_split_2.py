@@ -32,7 +32,7 @@ def split_by_year_n(output: str, filename: str, n: int):
         last_date = last_date.replace('-', '')
         print(f'Первая дата: {first_date}, последняя дата: {last_date}')
         path = os.path.join(output, f'{first_date}_{last_date}.csv')
-        with open(path, 'w+', encoding='utf8') as year_file:
+        with open(path, 'w', encoding='utf8', newline='') as year_file:
             writer = csv.writer(year_file)
             writer.writerow(['data', 'temperature', 'pressure', 'wind'])
             for row in year_data:

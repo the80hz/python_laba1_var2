@@ -42,7 +42,7 @@ def table_to_csv(filename: str, url_from: str, year: int, month: int):
     Параметр year - год, с которого будет записана в file.
     Параметр month - месяц, с которого будет записана в file.
     """
-    with open(filename, 'w+', encoding='utf8') as dataset:
+    with open(filename, 'w', encoding='utf8', newline='') as dataset:
         print(f'File generated: {datetime.today()}', file=dataset)
         print('data,temperature,pressure,wind', file=dataset)
 
