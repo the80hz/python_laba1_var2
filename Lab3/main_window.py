@@ -100,11 +100,8 @@ class MainWindow(QMainWindow):
         self.button_next.show()
 
     def create_annots(self):
-        # copy path_to_dataset to path_to_annots/dataset.csv.temp
-
         shutil.copy(self.path_to_dataset, self.path_to_dir + '/dataset.csv.temp')
         self.path_to_annots = self.path_to_dir + '/dataset.csv.temp'
-
         self.button_annots.setText('Пересоздать файл аннотации')
         self.button_next.setEnabled(True)
 
@@ -132,4 +129,5 @@ if __name__ == '__main__':
     window.show()
     app.exec()
 
-    os.remove(window.path_to_annots)
+    if window.path_to_annots != '':
+        os.remove(window.path_to_annots)
