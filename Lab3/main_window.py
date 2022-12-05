@@ -27,6 +27,8 @@ from Lab2 import return_4
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.next_day = None
+        self.button_next = None
         self.button_years = None
         self.button_weeks = None
         self.weeks = None
@@ -49,15 +51,15 @@ class MainWindow(QMainWindow):
                                                                'CSV files (*.csv)')[0]
 
         self.button_annots = QPushButton('Создать файл аннотации', self)
-        self.button_annots.move(20, 70)
-        self.button_annots.resize(200, 50)
+        self.button_annots.move(255, 20)
+        self.button_annots.resize(225, 50)
         self.button_annots.clicked.connect(self.create_annots)
         self.button_annots.setEnabled(False)
         self.button_annots.show()
 
         self.button_dir = QPushButton('Выбрать директорию \nдля аннотаций', self)
         self.button_dir.move(20, 20)
-        self.button_dir.resize(200, 50)
+        self.button_dir.resize(225, 50)
         self.button_dir.clicked.connect(self.open_dir)
         if self.path_to_dir != '':
             self.button_dir.setText('Директория выбрана')
@@ -68,28 +70,34 @@ class MainWindow(QMainWindow):
         self.button_dir.show()
 
         self.years = QLineEdit('Введите количество лет', self)
-        self.years.move(20, 120)
-        self.years.resize(200, 20)
+        self.years.move(20, 80)
+        self.years.resize(225, 20)
         self.years.show()
 
         self.button_years = QPushButton('Разбить на года', self)
-        self.button_years.move(220, 120)
-        self.button_years.resize(150, 30)
+        self.button_years.move(20, 110)
+        self.button_years.resize(225, 30)
         self.button_years.clicked.connect(self.split_years)
         self.button_years.setEnabled(False)
         self.button_years.show()
 
         self.weeks = QLineEdit('Введите количество недель', self)
-        self.weeks.move(20, 150)
-        self.weeks.resize(200, 20)
+        self.weeks.move(255, 80)
+        self.weeks.resize(225, 20)
         self.weeks.show()
 
         self.button_weeks = QPushButton('Разбить на недели', self)
-        self.button_weeks.move(220, 150)
-        self.button_weeks.resize(150, 30)
+        self.button_weeks.move(255, 110)
+        self.button_weeks.resize(225, 30)
         self.button_weeks.clicked.connect(self.split_weeks)
         self.button_weeks.setEnabled(False)
         self.button_weeks.show()
+
+        self.button_next = QPushButton('Показать следующий день', self)
+        self.button_next.move(20,430)
+        self.button_next.resize(460, 50)
+        self.button_next.setEnabled(False)
+        self.button_next.show()
 
     def create_annots(self):
         # copy path_to_dataset to path_to_annots/dataset.csv.temp
@@ -97,7 +105,8 @@ class MainWindow(QMainWindow):
         shutil.copy(self.path_to_dataset, self.path_to_dir + '/dataset.csv.temp')
         self.path_to_annots = self.path_to_dir + '/dataset.csv.temp'
 
-        self.button_annots.setText('Файл аннотации создан')
+        self.button_annots.setText('Пересоздать файл аннотации')
+        self.button_next.setEnabled(True)
 
     def open_dir(self):
         self.path_to_dir = QFileDialog.getExistingDirectory(self, 'Выберите директорию', '')
@@ -106,7 +115,6 @@ class MainWindow(QMainWindow):
         self.button_annots.setEnabled(True)
         self.button_years.setEnabled(True)
         self.button_weeks.setEnabled(True)
-
 
     def split_years(self):
         year_split_2.split_by_year_n(self.path_to_dir, self.path_to_dataset, int(self.years.text()))
@@ -117,11 +125,11 @@ class MainWindow(QMainWindow):
         self.button_weeks.setText('Файл создан')
 
 
+
 if __name__ == '__main__':
     app = QApplication([])
     window = MainWindow()
     window.show()
     app.exec()
 
-    # detele temp file
     os.remove(window.path_to_annots)
