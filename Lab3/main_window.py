@@ -8,27 +8,27 @@ from datetime import datetime
 
 from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QInputDialog, QTableWidget, \
     QTableWidgetItem, QHeaderView, QAbstractItemView, QMenu, QAbstractScrollArea, QAbstractItemView, \
-    QPushButton, QComboBox, QCheckBox, QSpinBox, QDoubleSpinBox, QLabel, QGroupBox, QGridLayout, QFormLayout, \
-    QRadioButton, QButtonGroup, QSizePolicy, QScrollArea, QFrame, QTabWidget, QStackedWidget, QStackedLayout, \
+    QPushButton, QComboBox, QCheckBox, QSpinBox, QDoubleSpinBox, QLabel, QGroupBox, QGridLayout, QFormLayout \
+    , QRadioButton, QButtonGroup, QSizePolicy, QScrollArea, QFrame, QTabWidget, QStackedWidget, QStackedLayout, \
     QStatusBar, QProgressBar, QToolButton, QToolBar, QStyle, QStyleOption, QStylePainter, QStyleFactory, \
     QStyleOptionProgressBar, QStyleOptionSlider, QStyleOptionToolButton, QStyleOptionButton, QStyleOptionTab, \
-    QStyleOptionTabWidgetFrame, QStyleOptionTabBarBase, QLineEdit, QPlainTextEdit, QDateEdit, QTimeEdit, \
-    QDateTimeEdit, QCalendarWidget, QDial, QSlider, QScrollBar, QSplitter, QTreeView, QTreeWidget, QTreeWidgetItem, \
-    QHeaderView, QAbstractItemView, QMenu, QAbstractScrollArea, QAbstractItemView, QTableWidget, QTableWidgetItem
+    QStyleOptionTabWidgetFrame, QStyleOptionTabBarBase, QLineEdit, QPlainTextEdit, QDateEdit, QTimeEdit
 
 from PyQt6.QtGui import QCursor
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 
+from Lab2 import year_split_2
+from Lab2 import week_split_3
 from Lab2 import return_4
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.weeks_checkbox = None
-        self.years_checkbox = None
+        self.button_years = None
+        self.button_weeks = None
         self.weeks = None
         self.years = None
         self.button_annots = None
@@ -63,33 +63,40 @@ class MainWindow(QMainWindow):
             self.button_dir.setText('Директория выбрана')
             self.button_dir.setEnabled(False)
             self.button_annots.setEnabled(True)
+            self.button_years.setEnabled(True)
+            self.button_weeks.setEnabled(True)
         self.button_dir.show()
 
-        self.years = QLineEdit(self)
-        self.years.setPlaceholderText = 'Введите количество лет'
-        self.years.move(20, 130)
-        self.years.resize(170, 20)
+        self.years = QLineEdit('Введите количество лет', self)
+        self.years.move(20, 120)
+        self.years.resize(200, 20)
         self.years.show()
 
-        self.weeks = QLineEdit(self)
-        self.weeks.setPlaceholderText = 'Введите количество недель'
-        self.weeks.move(20, 160)
-        self.weeks.resize(170, 20)
+        self.button_years = QPushButton('Разбить на года', self)
+        self.button_years.move(220, 120)
+        self.button_years.resize(150, 30)
+        self.button_years.clicked.connect(self.split_years)
+        self.button_years.setEnabled(False)
+        self.button_years.show()
+
+        self.weeks = QLineEdit('Введите количество недель', self)
+        self.weeks.move(20, 150)
+        self.weeks.resize(200, 20)
         self.weeks.show()
 
-        self.years_checkbox = QCheckBox(self)
-        self.years_checkbox.move(200, 130)
-        self.years_checkbox.resize(200, 20)
-        self.years_checkbox.show()
-
-        self.weeks_checkbox = QCheckBox(self)
-        self.weeks_checkbox.move(200, 160)
-        self.weeks_checkbox.resize(170, 20)
-        self.weeks_checkbox.show()
+        self.button_weeks = QPushButton('Разбить на недели', self)
+        self.button_weeks.move(220, 150)
+        self.button_weeks.resize(150, 30)
+        self.button_weeks.clicked.connect(self.split_weeks)
+        self.button_weeks.setEnabled(False)
+        self.button_weeks.show()
 
     def create_annots(self):
+        # copy path_to_dataset to path_to_annots/dataset.csv.temp
+
         shutil.copy(self.path_to_dataset, self.path_to_dir + '/dataset.csv.temp')
         self.path_to_annots = self.path_to_dir + '/dataset.csv.temp'
+
         self.button_annots.setText('Файл аннотации создан')
 
     def open_dir(self):
@@ -97,6 +104,17 @@ class MainWindow(QMainWindow):
         self.button_dir.setText('Директория выбрана')
         self.button_dir.setEnabled(False)
         self.button_annots.setEnabled(True)
+        self.button_years.setEnabled(True)
+        self.button_weeks.setEnabled(True)
+
+
+    def split_years(self):
+        year_split_2.split_by_year_n(self.path_to_dir, self.path_to_dataset, int(self.years.text()))
+        self.button_years.setText('Файл создан')
+        
+    def split_weeks(self):
+        week_split_3.split_by_week_n(self.path_to_dir, self.path_to_dataset, int(self.weeks.text()))
+        self.button_weeks.setText('Файл создан')
 
 
 if __name__ == '__main__':
@@ -105,5 +123,5 @@ if __name__ == '__main__':
     window.show()
     app.exec()
 
-    if window.path_to_annots != '':
-        os.remove(window.path_to_annots)
+    # detele temp file
+    os.remove(window.path_to_annots)
