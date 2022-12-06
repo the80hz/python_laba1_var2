@@ -12,7 +12,13 @@ from Lab2 import year_split_2
 
 
 class MainWindow(QMainWindow):
+    """
+    Класс окна с показом погоды
+    """
     def __init__(self):
+        """
+        Инициализация главного окна
+        """
         super().__init__()
         self.button_file = None
         self.table = None
@@ -33,6 +39,9 @@ class MainWindow(QMainWindow):
         self.initui()
 
     def initui(self):
+        """
+        Инициализация интерфейса
+        """
         self.setWindowTitle('Weather downloader')
         self.setFixedSize(500, 355)
 
@@ -109,6 +118,9 @@ class MainWindow(QMainWindow):
         self.show()
 
     def next_day(self):
+        """
+        Показывает следующий день
+        """
         weather = return_4._next(self.path_to_dataset)
         self.table.setItem(0, 0, QTableWidgetItem(weather[0]))
         self.table.setItem(0, 1, QTableWidgetItem(weather[1]))
@@ -116,6 +128,9 @@ class MainWindow(QMainWindow):
         self.table.setItem(0, 3, QTableWidgetItem(weather[3]))
 
     def create_annots(self):
+        """
+        Создает файл аннотаций
+        """
         shutil.copy(self.path_to_dataset, self.path_to_dir + '/dataset.csv.temp')
         self.path_to_annots = self.path_to_dir + '/dataset.csv.temp'
         with open(self.path_to_annots, 'r', encoding='utf8') as file:
@@ -129,6 +144,9 @@ class MainWindow(QMainWindow):
         self.table.setEnabled(True)
 
     def open_dir(self):
+        """
+        Открывает директорию для аннотаций
+        """
         self.path_to_dir = QFileDialog.getExistingDirectory(self, 'Выберите директорию', '')
         self.button_dir.setText('Директория выбрана')
         self.button_dir.setEnabled(False)
@@ -137,17 +155,26 @@ class MainWindow(QMainWindow):
         self.button_weeks.setEnabled(True)
 
     def split_years(self):
+        """
+        Разбивает файл датасета на года
+        """
         # if self.years.text() is not int: do nothing
         if self.years.text().isdigit():
             year_split_2.split_by_year_n(self.path_to_dir, self.path_to_dataset, int(self.years.text()))
             self.button_years.setText('Файл создан')
 
     def split_weeks(self):
+        """
+        Разбивает файл датасета на недели
+        """
         if self.years.text().isdigit():
             week_split_3.split_by_week_n(self.path_to_dir, self.path_to_dataset, int(self.weeks.text()))
             self.button_weeks.setText('Файл создан')
 
     def start(self):
+        """
+        Запускает окно выбора датасета
+        """
         while self.path_to_dataset == '':
             self.path_to_dataset = QFileDialog.getOpenFileName(self, 'Выберите файл с данными', '',
                                                                'CSV files (*.csv)')[0]
@@ -171,6 +198,9 @@ class MainWindow(QMainWindow):
                     self.last_day = row[0]
 
     def reset(self):
+        """
+        Сбрасывает все настройки
+        """
         self.button_dir.setEnabled(True)
         self.button_annots.setEnabled(False)
         self.button_years.setEnabled(False)
