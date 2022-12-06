@@ -1,5 +1,3 @@
-# GUI pyqt6
-
 import csv
 import os
 import shutil
@@ -139,12 +137,15 @@ class MainWindow(QMainWindow):
         self.button_weeks.setEnabled(True)
 
     def split_years(self):
-        year_split_2.split_by_year_n(self.path_to_dir, self.path_to_dataset, int(self.years.text()))
-        self.button_years.setText('Файл создан')
+        # if self.years.text() is not int: do nothing
+        if self.years.text().isdigit():
+            year_split_2.split_by_year_n(self.path_to_dir, self.path_to_dataset, int(self.years.text()))
+            self.button_years.setText('Файл создан')
 
     def split_weeks(self):
-        week_split_3.split_by_week_n(self.path_to_dir, self.path_to_dataset, int(self.weeks.text()))
-        self.button_weeks.setText('Файл создан')
+        if self.years.text().isdigit():
+            week_split_3.split_by_week_n(self.path_to_dir, self.path_to_dataset, int(self.weeks.text()))
+            self.button_weeks.setText('Файл создан')
 
     def start(self):
         while self.path_to_dataset == '':
