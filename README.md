@@ -5,7 +5,7 @@
 [Лабораторная 2](https://github.com/itsecd/python/tree/master/Lab2) - Обработка данных;  
 [Лабораторная 3](https://github.com/itsecd/python/tree/master/Lab3) - Работа с GUI;  
 [Лабораторная 4](https://github.com/itsecd/python/tree/master/Lab4) - Анализ и визуализация данных;  
-[Лабораторная 4](https://github.com/itsecd/python/tree/master/Lab5) -  Обучение и тестирование модели.
+[Лабораторная 5](https://github.com/itsecd/python/tree/master/Lab5) - Обучение и тестирование модели.
 
 Текущая успеваемость доступна [здесь](https://docs.google.com/spreadsheets/d/1-T5bN60sduQSYTlml_Gg0qIEoQLg-EZVz1_b6QNdtjE/edit?usp=sharing).
 
