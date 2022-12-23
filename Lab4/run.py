@@ -44,6 +44,16 @@ def group_by_date(_df: pd):
     ].mean()
 
 
+def statistics(_df: pd) -> None:
+    """
+    Print statistics
+    """
+    print(
+        _df["Temperature"].describe(),
+        _df["Fahrenheit"].describe(),
+    )
+
+
 def dataframe(path: str) -> pd:
     """
     Read csv file and return pandas dataframe
@@ -65,4 +75,8 @@ def dataframe(path: str) -> pd:
 
 if __name__ == "__main__":
     df = dataframe('../data/dataset.csv')
+
+    temperature_filter(df, 21)
+    statistics(df)
+
     graphics(df)
