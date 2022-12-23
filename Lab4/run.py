@@ -1,4 +1,21 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+
+
+def graphics(_df: pd) -> None:
+    """
+    Draws graphs of temperature changes
+    """
+    _df["Date"] = pd.to_datetime(_df["Date"], format="%Y-%m-%d")
+    fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(40, 8))
+    plt.subplots_adjust(wspace=0.3, hspace=0.3)
+
+    axes[0].bar(_df["Date"], _df["Temperature"], color="#5900A6")
+    axes[0].set(title="Temperature")
+    axes[0].set_xlabel("date")
+    axes[0].set_ylabel("temp")
+
+    plt.show()
 
 
 def temperature_filter(_df: pd, temp: float) -> pd:
@@ -48,3 +65,4 @@ def dataframe(path: str) -> pd:
 
 if __name__ == "__main__":
     df = dataframe('../data/dataset.csv')
+    graphics(df)
