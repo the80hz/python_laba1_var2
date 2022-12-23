@@ -18,6 +18,38 @@ def graphics(_df: pd) -> None:
     plt.show()
 
 
+def graphics_date(_df: pd, month: int, year: int):
+    """
+    Draws graphs of temperature changes by date
+    """
+    fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(40, 8))
+    tmp_df = _df.loc[(_df["Date"].dt.year == year) & (_df["Date"].dt.month == month)]
+    plt.subplots_adjust(wspace=0.5, hspace=0.5)
+
+    axes[0].plot(tmp_df["Date"], tmp_df["Temperature"], color="#5900A6")
+    axes[0].set(title="Temperature")
+    axes[0].set_xlabel("date")
+    axes[0].set_ylabel("temp")
+
+    axes[1].plot(
+        tmp_df["Date"],
+        tmp_df["Temperature"].rolling(20).median(),
+        color="#5900A6",
+    )
+    axes[1].set(title="Median")
+    axes[1].set_xlabel("date")
+    axes[1].set_ylabel("temp")
+
+    axes[2].plot(
+        tmp_df["Date"], tmp_df["Temperature"].rolling(20).mean(), color="#5900A6"
+    )
+    axes[2].set(title="Mean")
+    axes[2].set_xlabel("date")
+    axes[2].set_ylabel("temp")
+
+    plt.show()
+
+
 def temperature_filter(_df: pd, temp: float) -> pd:
     """
     Filter by temperature and return dataframe
@@ -80,3 +112,4 @@ if __name__ == "__main__":
     statistics(df)
 
     graphics(df)
+    graphics_date(df, 7, 2011)
