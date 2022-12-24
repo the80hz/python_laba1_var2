@@ -1,6 +1,5 @@
-bs4
+beautifulsoup4
 requests
 pyqt6
-beautifulsoup4
 pandas
 matplotlib

@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 
 def graphics(_df: pd) -> None:
     """
+    graphics(_df: pd) -> None
+    _df: pandas dataframe
+
     Draws graphs of temperature changes
     """
     _df["Date"] = pd.to_datetime(_df["Date"], format="%Y-%m-%d")
@@ -20,6 +23,11 @@ def graphics(_df: pd) -> None:
 
 def graphics_date(_df: pd, month: int, year: int):
     """
+    graphics_date(_df: pd, month: int, year: int) -> None
+    _df: pandas dataframe
+    month: the desired month
+    year: the desired year
+
     Draws graphs of temperature changes by date
     """
     fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(40, 8))
@@ -52,6 +60,10 @@ def graphics_date(_df: pd, month: int, year: int):
 
 def temperature_filter(_df: pd, temp: float) -> pd:
     """
+    temperature_filter(_df: pd, temp: float) -> pd
+    _df: pandas dataframe
+    temp: the desired temperature
+
     Filter by temperature and return dataframe
     """
     return _df[_df["Temperature"] >= temp]
@@ -59,6 +71,11 @@ def temperature_filter(_df: pd, temp: float) -> pd:
 
 def date_filter(_df: pd, _start: str, _end: str) -> pd:
     """
+    date_filter(_df: pd, _start: str, _end: str) -> pd
+    _df: pandas dataframe
+    _start: start date
+    _end: end date
+
     Filter by date and return dataframe
     """
     _df["Date"] = pd.to_datetime(_df["Date"], format="%Y-%m-%d")
@@ -67,6 +84,9 @@ def date_filter(_df: pd, _start: str, _end: str) -> pd:
 
 def group_by_date(_df: pd):
     """
+    group_by_date(_df: pd) -> pd
+    _df: pandas dataframe
+
     Group by date and return dataframe
     """
     _df["Date"] = pd.to_datetime(_df["Date"], format="%Y-%m-%d")
@@ -78,6 +98,9 @@ def group_by_date(_df: pd):
 
 def statistics(_df: pd) -> None:
     """
+    statistics(_df: pd) -> None
+    _df: pandas dataframe
+
     Print statistics
     """
     print(
@@ -88,6 +111,9 @@ def statistics(_df: pd) -> None:
 
 def dataframe(path: str) -> pd:
     """
+    dataframe(path: str) -> pd
+    path: path to file
+
     Read csv file and return pandas dataframe
     """
     _df = pd.read_csv(path, sep=",")
