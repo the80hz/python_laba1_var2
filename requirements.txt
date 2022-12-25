@@ -4,3 +4,5 @@ opencv-python
 torch
 torchvision
 numpy
+plotly
+scikit-learn
