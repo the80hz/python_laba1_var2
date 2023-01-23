@@ -28,7 +28,7 @@
 3.4. Ваш репозиторий *должен* содержать файлы [.gitignore](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files) (для них имеется набор [шаблонов](https://github.com/github/gitignore)) и [requirements.txt](https://www.jetbrains.com/help/pycharm/managing-dependencies.html#create-requirements);  
 
 
-4. Когда необходимый код написан, соответсвует [PEP](https://peps.python.org/pep-0008/) и **работает**, необходимо сделать [пул-риквест в исходный репозиторий](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork);  
+4. Когда необходимый код написан, соответствует [PEP](https://peps.python.org/pep-0008/) и **работает**, необходимо сделать [пул-риквест в исходный репозиторий](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork);  
 4.1. Соответственно, в параметрах пул-риквеста в качестве `base repository` указывается `itsecd\python`, в качестве `base` - `master`;  
 4.2. В качестве `head repository` указывается ваш форкнутый репозиторий, в качестве `compare` - ветка, в которой вы работали в своем репозитории;  
 4.3. Название пул риквеста *должно* формироваться следующим образом: `<Номер группы> <ФИО> Лаб.<Номер лабы> Вар.<Номер варианта>`;  
