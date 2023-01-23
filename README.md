@@ -22,7 +22,7 @@
 
 
 3. Создать проект в выбранной IDE, начать реализовывать необходимый по заданию код и [коммитить](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/about-commits) результаты;  
-3.1. Преподаватель с большей вероятностью поверит ав то, что код в репозитории написан вами лично, если коммитов в репозитории будет больше одного;  
+3.1. Преподаватель с большей вероятностью поверит в то, что код в репозитории написан вами лично, если коммитов в репозитории будет больше одного;  
 3.2. Так как лабораторные в целом небольшие, было бы неплохо делать коммит сразу, как только решена некоторая промежуточная задача;  
 3.3. Коммиты *должны* иметь вменяемые описания на английском языке;  
 3.4. Ваш репозиторий *должен* содержать файлы [.gitignore](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files) (для них имеется набор [шаблонов](https://github.com/github/gitignore)) и [requirements.txt](https://www.jetbrains.com/help/pycharm/managing-dependencies.html#create-requirements);  
