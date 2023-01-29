@@ -6,9 +6,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QTableWidget
     QTableWidgetItem, QAbstractItemView, \
     QPushButton, QLineEdit
 
-from Lab2 import return_4
-from Lab2 import week_split_3
-from Lab2 import year_split_2
+from Lab3 import week_split_3, return_4, year_split_2
 
 
 class MainWindow(QMainWindow):
