@@ -5,11 +5,9 @@
 [Лабораторная 2](https://github.com/itsecd/python/tree/master/Lab2) - Обработка данных;  
 [Лабораторная 3](https://github.com/itsecd/python/tree/master/Lab3) - Работа с GUI;  
 [Лабораторная 4](https://github.com/itsecd/python/tree/master/Lab4) - Анализ и визуализация данных;  
-Лабораторная 5 - TBA.
+[Лабораторная 5](https://github.com/itsecd/python/tree/master/Lab5) - Обучение и тестирование модели.
 
 Текущая успеваемость доступна [здесь](https://docs.google.com/spreadsheets/d/1-T5bN60sduQSYTlml_Gg0qIEoQLg-EZVz1_b6QNdtjE/edit?usp=sharing).
-
-\* На данный момент курс находится в процессе модификации.
 
 ## Правила работы с кодом:
 1. Для выполнения лабораторной работы сначала *необходимо* [форкнуть](https://docs.github.com/en/get-started/quickstart/fork-a-repo) этот репозиторий;  
@@ -24,13 +22,13 @@
 
 
 3. Создать проект в выбранной IDE, начать реализовывать необходимый по заданию код и [коммитить](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/about-commits) результаты;  
-3.1. Преподаватель с большей вероятностью поверит ав то, что код в репозитории написан вами лично, если коммитов в репозитории будет больше одного;  
+3.1. Преподаватель с большей вероятностью поверит в то, что код в репозитории написан вами лично, если коммитов в репозитории будет больше одного;  
 3.2. Так как лабораторные в целом небольшие, было бы неплохо делать коммит сразу, как только решена некоторая промежуточная задача;  
 3.3. Коммиты *должны* иметь вменяемые описания на английском языке;  
 3.4. Ваш репозиторий *должен* содержать файлы [.gitignore](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files) (для них имеется набор [шаблонов](https://github.com/github/gitignore)) и [requirements.txt](https://www.jetbrains.com/help/pycharm/managing-dependencies.html#create-requirements);  
 
 
-4. Когда необходимый код написан, соответсвует [PEP](https://peps.python.org/pep-0008/) и **работает**, необходимо сделать [пул-риквест в исходный репозиторий](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork);  
+4. Когда необходимый код написан, соответствует [PEP](https://peps.python.org/pep-0008/) и **работает**, необходимо сделать [пул-риквест в исходный репозиторий](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork);  
 4.1. Соответственно, в параметрах пул-риквеста в качестве `base repository` указывается `itsecd\python`, в качестве `base` - `master`;  
 4.2. В качестве `head repository` указывается ваш форкнутый репозиторий, в качестве `compare` - ветка, в которой вы работали в своем репозитории;  
 4.3. Название пул риквеста *должно* формироваться следующим образом: `<Номер группы> <ФИО> Лаб.<Номер лабы> Вар.<Номер варианта>`;  
@@ -65,7 +63,6 @@
 
 Если вы столкнулись с непреодолимыми трудностями в ходе выполнения лабораторной работы, вы можете задать вопрос в:
 * дискорд-канале, посвященном предмету,
-* телеграм чате вашего курса,
-* оформить свой вопрос в виде [ишью](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue) в этом репозитории.
+* телеграм чате вашего курса.
 
 
